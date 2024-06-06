@@ -1,1 +1,10 @@
-@import '_reset'
+@import '_reset';
+@import '_variables';
+
+.page {
+  background-image: url('assets/images/bannerbig_Desktop\ 1.png');
+  background-position: right top;
+  background-repeat: no-repeat;
+  background-size: auto 580px;
+  min-height: 100vh;
+}
