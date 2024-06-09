@@ -2,7 +2,7 @@ import { ValidationErrors } from "@angular/forms";
 
 export type ValidationError = ValidationErrors | null | undefined
 
-export type registryForm = {
+export type RegistryForm = {
   firstName?: string;
   lastName?: string;
   email?: string;
@@ -10,10 +10,10 @@ export type registryForm = {
   confirmPassword?: string;
 }
 
-export type RegistryErrors = {
+export type ValidationErrorMessages = {
   email: string,
-  minlength: string,
   passwordsMismatch: string,
+  pattern: string,
   required: string,
 }
 

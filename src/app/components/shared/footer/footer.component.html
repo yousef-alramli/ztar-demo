@@ -1,0 +1,12 @@
+<div class="footer-container">
+  <div class="footer-left">
+    <h3 class="section-header">Footer</h3>
+  </div>
+
+  <div>
+    <h3 class="section-header">Site Pages</h3>
+    @for (page of pages; track $index) {
+    <a class="pages-links" [routerLink]="page.link">{{ page.name }}</a>
+    }
+  </div>
+</div>

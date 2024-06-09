@@ -1,0 +1,28 @@
+@import '../../../styles/_variables';
+
+.header-Container {
+  align-items: center;
+  background-color: $navy;
+  display: flex;
+  height: 64px;
+  justify-content: space-between;
+  padding: 8px 64px;
+
+  .menu-icon {
+    color: $white;
+    font-size: 30px;
+    height: 30px;
+  }
+
+  .app-button {
+    background: $transparent;
+    border: 3px solid $white;
+    color: $white;
+    display: block;
+    font-size: $font-xxs;
+    height: 40px;
+    padding-top: 10px;
+    text-align: center;
+    width: 80px;
+  }
+}

@@ -1,0 +1,79 @@
+@import '_variables';
+
+.auth-page {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100vh;
+
+  .image-background {
+    background-image: url('../../assets/images/bannerbig_Desktop\ 1.png');
+    background-position: right top;
+    background-repeat: no-repeat;
+    background-size: auto 100%;
+    bottom: 0;
+    filter: blur(4px);
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: -1;
+  }
+
+  .auth-form {
+    align-items: center;
+    background-color: $transparent-white;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    max-width: 500px;
+    padding: 20px;
+    width: 100%;
+
+    .auth-header {
+      color: $navy;
+      font-family: 'Lato 700';
+      font-size: $font-large;
+      margin: 20px;
+    }
+
+    .auth-label {
+      display: block;
+    }
+
+    .auth-input {
+      border: 1px solid $orange;
+      font-size: $font-xs;
+      height: 56px;
+      margin: 20px 0;
+      padding: 10px 15px;
+      width: 100%;
+
+      &:not(.app-button) {
+        border-radius: 4px;
+      }
+    }
+
+    .error-text {
+      align-self: baseline;
+      bottom: 20px;
+      color: $warning;
+      height: 0;
+      position: relative;
+    }
+  }
+
+  .new-account {
+    margin-top: 20px;
+
+    .new-account-link {
+      color: $orange;
+      cursor: pointer;
+      font-family: 'Lato 600';
+      font-size: $font-small;
+      padding: 5px;
+    }
+  }
+}

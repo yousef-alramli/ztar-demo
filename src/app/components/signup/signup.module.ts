@@ -4,8 +4,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { SignupComponent } from './signup.component';
+import { SignupRoutingModule } from './signup-routing.module';
 
-import { signupRoutes } from './signup.routes';
 
 @NgModule({
   declarations: [
@@ -13,9 +13,9 @@ import { signupRoutes } from './signup.routes';
   ],
   imports: [
     CommonModule,
-    RouterModule.forChild(signupRoutes),
     FormsModule,
     ReactiveFormsModule,
+    SignupRoutingModule,
   ]
 })
 export class SignupModule { }

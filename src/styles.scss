@@ -1,10 +1,81 @@
 @import '_reset';
-@import '_variables';
+@import 'app/styles/_variables';
 
-.page {
-  background-image: url('assets/images/bannerbig_Desktop\ 1.png');
-  background-position: right top;
+@font-face {
+  font-family: 'Lato 700';
+  src: url('assets/fonts/Lato/Lato-Black.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Lato 600';
+  src: url('assets/fonts/Lato/Lato-Bold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: url('assets/fonts/Lato/Lato-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Lato 300';
+  src: url('assets/fonts/Lato/Lato-Light.ttf') format('truetype');
+}
+
+.page-container {
+  background: url('assets/images/bannerbig_Desktop\ 1.png'),
+    url('assets/images/Illustration\ desktop.png');
   background-repeat: no-repeat;
-  background-size: auto 580px;
-  min-height: 100vh;
+  background-size: auto 580px, 400px 400px;
+  background-position: right top, 370px 640px;
+  min-height: 1040px;
+  padding-left: 285px;
+  padding-top: 138px;
+  margin-bottom: 48px;
+}
+
+.app-button {
+  background: $white;
+  border-radius: 40px;
+  border: 1px solid $orange;
+  box-shadow: 0px 4px 4px 0px $transparent-black;
+  color: $orange;
+  cursor: pointer;
+  font-family: 'Lato 700';
+  height: 50px;
+  width: 100px;
+
+  &.revert-colors {
+    background-color: $orange;
+    color: $white;
+  }
+}
+
+@media screen and (max-width: $laptop-large-breakpoint) {
+  .page-container {
+    padding-left: 65px;
+    background-position: right top, 155px 640px;
+  }
+}
+
+@media screen and (max-width: $laptop-breakpoint) {
+  .page-container {
+    background: url('assets/images/bannertablet_tablet\ 1.png'),
+      url('assets/images/Illustration\ tablet.png');
+    background-position: center top, 87px 600px;
+    background-repeat: no-repeat;
+    background-size: auto 540px, 400px 400px;
+    padding-left: 64px;
+  }
+}
+
+@media screen and (max-width: $tablet-breakpoint) {
+  .page-container {
+    background: url('assets/images/bannerNew_Mobile\ 1.png'),
+    url('assets/images/Illustration\ Mobile.png');
+    background-position: center top, center 700px;
+    background-repeat: no-repeat;
+    background-size: auto 640px, 200px 200px;
+    padding-left: 64px;
+    padding: 19px 16px 48px;
+  }
 }

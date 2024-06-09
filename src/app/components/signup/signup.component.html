@@ -1,0 +1,62 @@
+<div class="auth-page">
+  <div class="image-background"></div>
+
+  <form class="auth-form" [formGroup]="signupForm" (ngSubmit)="onSignup()">
+    <p class="auth-header">WELCOME</p>
+
+    <input
+      class="auth-input"
+      placeholder="First name"
+      type="text"
+      formControlName="firstName"
+    />
+    <p class="error-text" *ngIf="formErrors['firstName']">
+      {{ formErrors["firstName"] }}
+    </p>
+
+    <input
+      class="auth-input"
+      placeholder="Last name"
+      type="text"
+      formControlName="lastName"
+    />
+
+    <input
+      class="auth-input"
+      placeholder="Email"
+      type="text"
+      formControlName="email"
+    />
+    <p class="error-text" *ngIf="formErrors['email']">
+      {{ formErrors["email"] }}
+    </p>
+
+    <input
+      class="auth-input"
+      placeholder="Password"
+      type="password"
+      formControlName="password"
+    />
+    <p class="error-text" *ngIf="formErrors['password']">
+      {{ formErrors["password"] }}
+    </p>
+
+    <input
+      class="auth-input"
+      placeholder="Confirm password"
+      type="password"
+      formControlName="confirmPassword"
+    />
+    <p class="error-text" *ngIf="formErrors['confirmPassword']">
+      {{ formErrors["confirmPassword"] }}
+    </p>
+
+    <input class="app-button revert-colors auth-input" type="submit" />
+  </form>
+
+  <div class="auth-form new-account">
+    <a routerLink="/login" class="new-account-link"
+      >Already have an account?</a
+    >
+  </div>
+</div>

@@ -1,0 +1,35 @@
+<div class="auth-page">
+  <div class="image-background"></div>
+
+  <form class="auth-form" [formGroup]="loginForm" (ngSubmit)="onLogin()">
+    <p class="auth-header">WELCOME</p>
+
+    <input
+      class="auth-input"
+      placeholder="Enter Email"
+      type="text"
+      formControlName="email"
+    />
+    <p class="error-text" *ngIf="formErrors['email']">
+      *{{ formErrors["email"] }}
+    </p>
+
+    <input
+      class="auth-input"
+      placeholder="Enter Password"
+      type="password"
+      formControlName="password"
+    />
+    <p class="error-text" *ngIf="formErrors['password']">
+      *{{ formErrors["password"] }}
+    </p>
+
+    <input class="app-button revert-colors auth-input" type="submit" />
+  </form>
+
+  <div class="auth-form new-account" >
+    <a routerLink="/signup"class="new-account-link">
+      Create new account
+    </a>
+  </div>
+</div>

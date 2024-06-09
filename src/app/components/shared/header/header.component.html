@@ -1,0 +1,14 @@
+<div class="header-Container">
+  <div class="side-bar-container">
+    <mat-icon class="menu-icon" fontIcon="menu"></mat-icon>
+    <div class="side-bar active">
+      @for (page of pages; track $index) {
+        <a class="page-link" [routerLink]="page.link">{{ page.name }}</a>
+      }
+    </div>
+  </div>
+
+  <div class="login-container">
+    <a class="app-button" routerLink="/login">Login</a>
+  </div>
+</div>

@@ -1,0 +1,78 @@
+@import '../../styles/_variables';
+
+.welcoming-container {
+  max-width: 526px;
+  width: 46%;
+
+  .celebrate {
+    font-size: $font-medium;
+  }
+
+  .welcome {
+    color: $pink;
+    font-family: 'Lato 300';
+    font-size: $font-xxl;
+    margin-top: 16px;
+  }
+
+  .library-system {
+    color: $pink;
+    font-family: 'Lato 700';
+    font-size: $font-huge;
+    letter-spacing: -1px;
+    margin-bottom: 12px;
+  }
+
+  .app-button {
+    height: 45px;
+    margin-top: 32px;
+    width: 170px;
+  }
+}
+
+@media screen and (max-width: $laptop-breakpoint) {
+  .welcoming-container {
+    max-width: 392px;
+    width: 43%;
+
+    .celebrate {
+      font-size: $font-small;
+    }
+
+    .welcome {
+      font-size: $font-large;
+      margin-top: 12px;
+    }
+
+    .library-system {
+      font-size: $font-xl;
+    }
+
+    .app-button {
+      margin-top: 16px;
+    }
+  }
+}
+
+@media screen and (max-width: $tablet-breakpoint) {
+  .welcoming-container {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    text-align: center;
+    width: 100%;
+
+    .celebrate {
+      font-size: $font-small;
+    }
+
+    .library-system {
+      margin-bottom: 16px;
+    }
+
+    .app-button {
+      margin-top: 24px;
+    }
+  }
+}

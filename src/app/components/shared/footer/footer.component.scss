@@ -1,0 +1,41 @@
+@import '../../../styles/variables';
+
+.footer-container {
+  background-color: $black;
+  color: $white;
+  display: flex;
+  height: 361px;
+  justify-content: space-around;
+  padding-top: 51px;
+  width: 100%;
+
+  .footer-left {
+    position: relative;
+    right: 7%;
+  }
+
+  .section-header {
+    font-family: 'Lato 700';
+    font-size: $font-medium;
+  }
+
+  .pages-links {
+    color: $white;
+    display: block;
+    font-family: 'Lato 700';
+    font-size: $font-xs;
+    margin-top: 22px;
+    padding: 10px 28px;
+  }
+}
+
+@media screen and (max-width: $tablet-breakpoint) {
+  .footer-container {
+    flex-direction: column-reverse;
+    padding-left: 40px;
+
+    .footer-left {
+      position: static;
+    }
+  }
+}
