@@ -3,18 +3,10 @@ import { NgModule } from '@angular/core';
 
 import { HomePageRoutingModule } from './home-page-routing.module';
 
-import { FooterComponent } from '../shared/footer/footer.component';
-import { HeaderComponent } from '../shared/header/header.component';
-import { HomePageComponent } from './home-page.component';
-
 @NgModule({
-  declarations: [
-    HomePageComponent,
-  ],
+  declarations: [],
   imports: [
     CommonModule,
-    FooterComponent,
-    HeaderComponent,
     HomePageRoutingModule,
   ],
 })

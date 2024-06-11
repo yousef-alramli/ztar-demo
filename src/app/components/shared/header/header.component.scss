@@ -1,5 +1,15 @@
 @import '../../../styles/_variables';
 
+@keyframes openNav {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
 .header-Container {
   align-items: center;
   background-color: $navy;
@@ -8,8 +18,20 @@
   justify-content: space-between;
   padding: 8px 64px;
 
-  .menu-icon {
+  .side-bar-container {
+    align-items: center;
     color: $white;
+    display: flex;
+  }
+
+  .page-name {
+    font-family: 'Lato 600';
+    font-size: $font-small;
+    margin-left: 14px;
+  }
+
+  .menu-icon {
+    cursor: pointer;
     font-size: 30px;
     height: 30px;
   }
@@ -24,5 +46,44 @@
     padding-top: 10px;
     text-align: center;
     width: 80px;
+  }
+
+  .side-bar {
+    animation-duration: 400ms;
+    animation-name: openNav;
+    animation-timing-function: ease-in-out;
+    background-color: $navy;
+    border-radius: 10px;
+    left: 30px;
+    padding: 24px 16px;
+    position: absolute;
+    top: 75px;
+    transition: all;
+    width: 240px;
+
+    .page-link {
+      align-items: center;
+      border-radius: 4px;
+      color: $transparent-white;
+      display: flex;
+      gap: 15px;
+      height: 54px;
+      margin-bottom: 12px;
+    }
+
+    .page-link:hover {
+      background-color: $pink;
+    }
+  }
+}
+
+@media screen and (max-width: $tablet-breakpoint) {
+  .header-Container {
+    padding: 8px 20px;
+
+    .side-bar {
+      left: 10px;
+      max-width: calc(100% - 20px);
+    }
   }
 }

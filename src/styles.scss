@@ -21,16 +21,27 @@
   src: url('assets/fonts/Lato/Lato-Light.ttf') format('truetype');
 }
 
-.page-container {
-  background: url('assets/images/bannerbig_Desktop\ 1.png'),
-    url('assets/images/Illustration\ desktop.png');
+.page {
   background-repeat: no-repeat;
-  background-size: auto 580px, 400px 400px;
-  background-position: right top, 370px 640px;
-  min-height: 1040px;
+}
+
+.page-banner {
+  background-image: url('assets/images/bannerbig_Desktop\ 1.png');
+  background-position: right top;
+  background-size: auto 580px;
+  min-height: 580px;
   padding-left: 285px;
   padding-top: 138px;
+}
+
+.page-body {
+  background-image: url('assets/images/Illustration\ desktop.png');
+  background-size: 400px 400px;
+  background-position: 370px top;
+  min-height: 400px;
   margin-bottom: 48px;
+  padding-left: 50%;
+  margin-top: 40px;
 }
 
 .app-button {
@@ -51,31 +62,45 @@
 }
 
 @media screen and (max-width: $laptop-large-breakpoint) {
-  .page-container {
+  .page-banner {
     padding-left: 65px;
-    background-position: right top, 155px 640px;
+  }
+
+  .page-body {
+    background-position: 87px top;
   }
 }
 
 @media screen and (max-width: $laptop-breakpoint) {
-  .page-container {
-    background: url('assets/images/bannertablet_tablet\ 1.png'),
-      url('assets/images/Illustration\ tablet.png');
-    background-position: center top, 87px 600px;
+  .page {
     background-repeat: no-repeat;
-    background-size: auto 540px, 400px 400px;
-    padding-left: 64px;
+  }
+
+  .page-banner {
+    background-image: url('assets/images/bannertablet_tablet\ 1.png');
+    background-position: center top;
+  }
+
+  .page-body {
+    background-image: url('assets/images/Illustration\ tablet.png');
+    background-size: 400px 400px;
   }
 }
 
 @media screen and (max-width: $tablet-breakpoint) {
-  .page-container {
-    background: url('assets/images/bannerNew_Mobile\ 1.png'),
-    url('assets/images/Illustration\ Mobile.png');
-    background-position: center top, center 700px;
+  .page {
+    background-position: center top;
     background-repeat: no-repeat;
-    background-size: auto 640px, 200px 200px;
-    padding-left: 64px;
     padding: 19px 16px 48px;
+  }
+
+  .page-banner {
+    background-image: url('assets/images/bannerNew_Mobile\ 1.png');
+    background-size: auto 640px;
+  }
+
+  .page-body {
+    background-image: url('assets/images/Illustration\ Mobile.png');
+    background-size: 200px 200px;
   }
 }

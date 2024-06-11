@@ -10,9 +10,11 @@
       type="text"
       formControlName="firstName"
     />
-    <p class="error-text" *ngIf="formErrors['firstName']">
-      {{ formErrors["firstName"] }}
-    </p>
+    @if (formErrors['firstName']) {
+      <p class="error-text">
+        {{ formErrors["firstName"] }}
+      </p>
+    }
 
     <input
       class="auth-input"
@@ -27,9 +29,11 @@
       type="text"
       formControlName="email"
     />
-    <p class="error-text" *ngIf="formErrors['email']">
-      {{ formErrors["email"] }}
-    </p>
+    @if (formErrors['email']) {
+      <p class="error-text">
+        {{ formErrors["email"] }}
+      </p>
+    }
 
     <input
       class="auth-input"
@@ -37,9 +41,11 @@
       type="password"
       formControlName="password"
     />
-    <p class="error-text" *ngIf="formErrors['password']">
-      {{ formErrors["password"] }}
-    </p>
+    @if (formErrors['password']) {
+      <p class="error-text">
+        {{ formErrors["password"] }}
+      </p>
+    }
 
     <input
       class="auth-input"
@@ -47,9 +53,11 @@
       type="password"
       formControlName="confirmPassword"
     />
-    <p class="error-text" *ngIf="formErrors['confirmPassword']">
-      {{ formErrors["confirmPassword"] }}
-    </p>
+    @if (formErrors['confirmPassword']) {
+      <p class="error-text">
+        {{ formErrors["confirmPassword"] }}
+      </p>
+    }
 
     <input class="app-button revert-colors auth-input" type="submit" />
   </form>

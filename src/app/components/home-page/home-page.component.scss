@@ -30,6 +30,22 @@
   }
 }
 
+.counts-holder {
+  padding-top: 145px;
+
+  .count-container {
+    margin-top: 15px;
+  }
+
+  .inline {
+    display: inline;
+  }
+
+  .bold {
+    font-family: 'Lato 700';
+  }
+}
+
 @media screen and (max-width: $laptop-breakpoint) {
   .welcoming-container {
     max-width: 392px;
@@ -74,5 +90,9 @@
     .app-button {
       margin-top: 24px;
     }
+  }
+
+  .counts-holder {
+    padding-top: 200px;
   }
 }

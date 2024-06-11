@@ -1,9 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-
-import {initializeApp} from 'firebase/app'
-
-import { environment } from '../environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -12,10 +8,5 @@ import { environment } from '../environments/environment';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent implements OnInit {
-  title = 'demo';
-
-  ngOnInit(): void {
-    initializeApp(environment.firebase);
-  }
+export class AppComponent {
 }

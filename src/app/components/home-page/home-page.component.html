@@ -1,6 +1,6 @@
-<app-header></app-header>
+<app-header pageName="Home"></app-header>
 
-<div class="page-container">
+<div class="page page-banner">
   <div class="welcoming-container">
     <p class="celebrate">Celebrate with us!</p>
     <p class="welcome">Welcome</p>
@@ -8,6 +8,20 @@
     <p class="celebrate">Shop from our online store!</p>
 
     <button class="app-button revert-colors">Shop Now!</button>
+  </div>
+</div>
+
+<div class="page page-body">
+  <div class="counts-holder">
+    <div class="count-container">
+      <p class="inline">Total number of books is: </p>
+      <p class="bold inline">{{ firebaseService.booksCount }}</p>
+    </div>
+
+    <div class="count-container">
+      <p class="inline">Total number of categories is: </p>
+      <p class="bold inline">{{ firebaseService.categoriesCount }}</p>
+    </div>
   </div>
 </div>
 

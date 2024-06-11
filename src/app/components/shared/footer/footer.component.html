@@ -6,7 +6,7 @@
   <div>
     <h3 class="section-header">Site Pages</h3>
     @for (page of pages; track $index) {
-    <a class="pages-links" [routerLink]="page.link">{{ page.name }}</a>
+    <a class="pages-links" [routerLink]="page.route">{{ page.name }}</a>
     }
   </div>
 </div>

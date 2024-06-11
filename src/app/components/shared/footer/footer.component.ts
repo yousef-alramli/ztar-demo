@@ -4,6 +4,8 @@ import { RouterLink } from '@angular/router';
 
 import { navigationPages } from '../../../constants/pages.const';
 
+import { NavigationPages } from '../../../types/navigation-pages.types';
+
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
@@ -15,5 +17,5 @@ import { navigationPages } from '../../../constants/pages.const';
   styleUrl: './footer.component.scss'
 })
 export class FooterComponent {
-  pages = navigationPages
+  pages: NavigationPages[] = navigationPages;
 }
