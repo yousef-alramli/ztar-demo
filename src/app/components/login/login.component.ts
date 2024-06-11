@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { FirebaseService } from '../../services/firebase.service';
+
 import { RegistryForm } from '../../types/registry.types';
+
 import { validateForm } from '../../utils/formValidation';
+
 
 @Component({
   selector: 'app-login',
@@ -11,8 +14,7 @@ import { validateForm } from '../../utils/formValidation';
   styleUrl: './login.component.scss',
 })
 export class LoginComponent {
-
-  constructor() {}
+  constructor(private firestoreService: FirebaseService) {}
 
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.email, Validators.required]),
@@ -27,18 +29,6 @@ export class LoginComponent {
       return;
     }
 
-    const { email, password } = this.loginForm.value as RegistryForm;
-    const auth = getAuth();
-    signInWithEmailAndPassword(auth, email as string, password as string)
-      .then((userCredential) => {
-        console.log('userCredential >>> ', userCredential);
-      })
-      .catch((error) => {
-        if (error.code === 'auth/invalid-credential') {
-          alert('Wrong email or password');
-        } else {
-          alert('Oops, some error occurred please try again later');
-        }
-      });
+    this.firestoreService.login(this.loginForm);
   }
 }

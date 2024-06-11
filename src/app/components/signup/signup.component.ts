@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-
 import { validateForm } from '../../utils/formValidation';
+
 import { RegistryForm } from '../../types/registry.types';
+
+import { FirebaseService } from '../../services/firebase.service';
 
 @Component({
   selector: 'app-signup',
@@ -12,6 +13,9 @@ import { RegistryForm } from '../../types/registry.types';
   styleUrl: './signup.component.scss'
 })
 export class SignupComponent {
+
+  constructor(private firebaseService: FirebaseService) { }
+
   signupForm = new FormGroup({
     firstName: new FormControl<string>('', [Validators.required]),
     lastName: new FormControl<string>(''),
@@ -30,29 +34,11 @@ export class SignupComponent {
    */
   onSignup() {
     this.formErrors = validateForm(this.signupForm, true);
-    console.log(this.signupForm.get('password')?.errors);
 
     if (Object.keys(this.formErrors).length) {
       return;
     }
 
-    const { email, password } = this.signupForm.value as RegistryForm;
-    const auth = getAuth();
-    createUserWithEmailAndPassword(auth, email as string, password as string)
-      .then((userCredential) => {
-
-        // update the displayName of the user
-        console.log();
-        updateProfile(userCredential.user, {
-          displayName: `${this.signupForm.value.firstName} ${this.signupForm.value.lastName || ''}`,
-        });
-      })
-      .catch((error) => {
-        if (error.code === 'auth/email-already-in-use') {
-          alert('This email already exists');
-        } else {
-          alert('Oops, some error occurred please try again later');
-        }
-      });
+    this.firebaseService.signup(this.signupForm);
   }
 }

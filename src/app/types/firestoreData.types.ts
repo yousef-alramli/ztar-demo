@@ -9,7 +9,6 @@ export type BookData = {
 };
 
 export type CategoryData = {
-  nave: string,
   value: string,
   id?: string,
 };

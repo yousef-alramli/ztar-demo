@@ -1,4 +1,7 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+
+import { Observable, from } from 'rxjs';
 
 import {
   addDoc,
@@ -18,12 +21,13 @@ import {
   QuerySnapshot,
 } from 'firebase/firestore';
 import { initializeApp } from 'firebase/app';
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 
+import { BOOKS_PATH, CATEGORIES_PATH } from '../constants/firestore.const';
 import { environment } from '../../environments/environment';
 
-import { DocData, QueryData, UpdateDocData } from '../types/firestoreData.types';
-import { BOOKS_PATH, CATEGORIES_PATH } from '../constants/firestore.const';
-import { Observable, from } from 'rxjs';
+import { CategoryData, DocData, QueryData, UpdateDocData } from '../types/firestoreData.types';
+import { RegistryForm } from '../types/registry.types';
 
 @Injectable({
   providedIn: 'root'
@@ -36,9 +40,48 @@ export class FirebaseService {
     this.firestore = getFirestore(app);
   }
 
+  allCategories!: {[key: string]: CategoryData};
   authorsCount: number = 0;
   booksCount: number = 0;
   categoriesCount: number = 0;
+
+  login(loginForm: FormGroup) {
+    const { email, password } = loginForm.value as RegistryForm;
+    const auth = getAuth();
+    signInWithEmailAndPassword(auth, email as string, password as string)
+      .then((userCredential) => {
+        console.log('userCredential >>> ', userCredential);
+      })
+      .catch((error) => {
+        if (error.code === 'auth/invalid-credential') {
+          alert('Wrong email or password');
+        } else {
+          alert('Oops, some error occurred please try again later');
+        }
+      });
+  }
+
+  signup(signupForm: FormGroup) {
+    const { email, password } = signupForm.value as RegistryForm;
+    const auth = getAuth();
+    createUserWithEmailAndPassword(auth, email as string, password as string)
+      .then((userCredential) => {
+
+        // update the displayName of the user
+        console.log();
+        updateProfile(userCredential.user, {
+          displayName: `${signupForm.value.firstName} ${signupForm.value.lastName || ''}`,
+        });
+      })
+      .catch((error) => {
+        if (error.code === 'auth/email-already-in-use') {
+          alert('This email already exists');
+        } else {
+          alert('Oops, some error occurred please try again later');
+        }
+      });
+
+  }
 
   addDoc(docData: DocData, collectionName: string): void {
     addDoc(collection(this.firestore, collectionName), docData).then(data => {
@@ -71,13 +114,13 @@ export class FirebaseService {
 
     if (fieldToFilter && operator && value) {
       filters.push(where(fieldToFilter, operator, value));
-  }
+    }
 
     if (customLimit) {
       filters.push(limit(customLimit));
     }
 
-    const customQuery = query(col, ...filters );
+    const customQuery = query(col, ...filters);
 
     return from(getDocs(customQuery));
   }
@@ -93,7 +136,7 @@ export class FirebaseService {
     });
   }
 
-  addMany(data: { [key: string]: string }[], collectionName: string): void {
+  addMultipleDocs(data: { [key: string]: string }[], collectionName: string): void {
     const batch = writeBatch(this.firestore);
     data.forEach(data => {
       const docRef = doc(collection(this.firestore, collectionName));
