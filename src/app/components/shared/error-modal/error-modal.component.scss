@@ -1,4 +1,22 @@
-.error-modal{
-    height: 300px;
-    width: 300px;
+@import '../../../styles/_variables';
+
+.error-modal {
+  color: $black;
+
+  .error-header {
+    font-family: 'Lato 700';
+    font-size: $font-xl;
   }
+
+  .error-message {
+    font-size: $font-medium;
+    line-height: 25px;
+  }
+
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 300px;
+  justify-content: space-around;
+  width: 450px;
+}

@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
@@ -15,6 +15,7 @@ import { FirebaseService } from '../../services/firebase/firebase.service';
 import { BOOKS_PATH, CATEGORIES_PATH } from '../../constants/firestore.const'
   ;
 import { BookData, CategoryData, QueryData } from '../../types/firestoreData.types';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-books',
@@ -26,7 +27,8 @@ import { BookData, CategoryData, QueryData } from '../../types/firestoreData.typ
     MatFormFieldModule,
     MatSelectModule,
     MatInputModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
   ],
   templateUrl: './books.component.html',
   styleUrl: './books.component.scss'
@@ -35,10 +37,13 @@ export class BooksComponent implements OnInit, OnDestroy {
 
   constructor(
     public firebaseService: FirebaseService,
+    private router: Router,
   ) { };
 
   books: BookData[] = [];
   displayColumns = ['number', 'title', 'year'];
+  selectedCategory:string = '';
+
   getBooksSubscribe!: Subscription;
   getCategoriesSubscribe!: Subscription;
 
@@ -75,9 +80,13 @@ export class BooksComponent implements OnInit, OnDestroy {
           id: book.id,
         } as BookData);
       });
-      console.log(allBooks);
+
       this.books = allBooks;
     });
+  }
+
+  redirectToDetails(id: string) {
+    this.router.navigate(['/books/' + id],)
   }
 
   ngOnDestroy(): void {

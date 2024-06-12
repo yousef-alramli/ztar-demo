@@ -69,9 +69,9 @@ export class FirebaseService {
       .then((userCredential) => {
 
         // update the displayName of the user
-        console.log();
+
         updateProfile(userCredential.user, {
-          displayName: `${signupForm.value.firstName} ${signupForm.value.lastName || ''}`,
+          displayName: `${signupForm.value.firstName} ${signupForm.value.lastName || ''}`.trim(),
         });
       })
       .catch((error) => {

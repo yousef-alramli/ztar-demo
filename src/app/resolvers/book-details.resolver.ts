@@ -1,32 +1,33 @@
 import { inject } from "@angular/core";
-import { ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot } from "@angular/router";
+import { ActivatedRouteSnapshot, ResolveFn, Router, RouterStateSnapshot } from "@angular/router";
 
 import { map } from "rxjs";
-
-import { DocumentData, DocumentSnapshot } from 'firebase/firestore';
 
 import { BOOKS_PATH } from "../constants/firestore.const";
 
 import { ModalService } from "../services/modal/modal.service";
 import { FirebaseService } from "../services/firebase/firebase.service";
-import { ErrorModalData } from "../types/modal.types";
 
-export const bookDetailsResolver: ResolveFn<DocumentSnapshot<DocumentData, DocumentData>> = (
+import { ErrorModalData } from "../types/modal.types";
+import { DocData } from "../types/firestoreData.types";
+
+export const bookDetailsResolver: ResolveFn<DocData> = (
   route: ActivatedRouteSnapshot,
   state: RouterStateSnapshot,
 ) => {
+  const router = inject(Router);
   const openModal = inject(ModalService).openErrorModal;
   const modalData: ErrorModalData = {
-    header: 'Oops',
+    header: 'Oops!',
     message: 'Can\'t find id, you can try again later',
   };
 
   const bookId = route.paramMap.get('id')!;
   return inject(FirebaseService).getDocById(bookId, BOOKS_PATH).pipe(map(data => {
-    console.log('dataaaa >>>', data.data());
+
     if (!data.data()) {
-      openModal(modalData, () => console.log('close'))
+      openModal(modalData, () => router.navigate(['books']))
     }
-    return data
+    return data.data() as DocData;
   }));
 };

@@ -3,42 +3,46 @@
 <div class="page page-banner"></div>
 
 <div class="page page-body">
-  <div class="category-dropdown">
+  <div class="dropdown-container dropdown">
     <p class="select-gener">Select the genre of books:</p>
 
-    <mat-form-field>
-      <mat-label>Filter</mat-label>
-      <mat-select (selectionChange)="getBooks($event.value)">
-        @for (category of firebaseService.allCategories ; track category) {
+    <div class="search-container">
+      <mat-form-field class="category-dropdown">
+        <mat-label>Filter</mat-label>
+        <mat-select [(ngModel)]="selectedCategory">
+          @for (category of firebaseService.allCategories ; track category) {
           <mat-option class="dropdown-options" [value]="category.id">{{ category.value }}</mat-option>
-        }
-      </mat-select>
-    </mat-form-field>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <button class="app-button" (click)="getBooks(selectedCategory)">Search</button>
+    </div>
   </div>
 
   @if (books.length) {
-    <table mat-table [dataSource]="books" class="table">
-      <!-- Position Column -->
-      <ng-container matColumnDef="number">
-        <th class="col col-1" *matHeaderCellDef> No. </th>
-        <td class="col col-1" *matCellDef="let element; let i = index"> {{ i + 1 }} </td>
-      </ng-container>
+  <table mat-table [dataSource]="books" class="table">
+    <!-- Position Column -->
+    <ng-container matColumnDef="number">
+      <th class="col col-1" *matHeaderCellDef> No. </th>
+      <td class="col col-1" *matCellDef="let element; let i = index">{{ i + 1 }}</td>
+    </ng-container>
 
-      <!-- Name Column -->
-      <ng-container matColumnDef="title">
-        <th class="col col-2" *matHeaderCellDef> Title </th>
-        <td class="col col-2" *matCellDef="let element"> {{element.title}} </td>
-      </ng-container>
+    <!-- Title Column -->
+    <ng-container matColumnDef="title">
+      <th class="col col-2" *matHeaderCellDef> Title </th>
+      <td class="col col-2" (click)="redirectToDetails(element.id)" *matCellDef="let element"> {{element.title}} </td>
+    </ng-container>
 
-      <!-- Symbol Column -->
-      <ng-container matColumnDef="year">
-        <th class="col col-3" *matHeaderCellDef> Year </th>
-        <td class="col col-3" *matCellDef="let element"> {{element.year}} </td>
-      </ng-container>
+    <!-- Year Column -->
+    <ng-container matColumnDef="year">
+      <th class="col col-3" *matHeaderCellDef> Year </th>
+      <td class="col col-3" *matCellDef="let element">{{element.year}}</td>
+    </ng-container>
 
-      <tr class="table-header" mat-header-row *matHeaderRowDef="displayColumns"></tr>
-      <tr class="table-row" mat-row *matRowDef="let row; columns: displayColumns;"></tr>
-    </table>
+    <tr class="table-header" mat-header-row *matHeaderRowDef="displayColumns"></tr>
+    <tr class="table-row" mat-row *matRowDef="let row; columns: displayColumns;"></tr>
+  </table>
   }
 </div>
 
