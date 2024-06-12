@@ -1,33 +1,45 @@
 <app-header pageName="Books"></app-header>
+
 <div class="page page-banner"></div>
+
 <div class="page page-body">
-  <table mat-table [dataSource]="books" class="table">
-    <!-- Position Column -->
-    <ng-container matColumnDef="number">
-      <th class="col col-1" *matHeaderCellDef> No. </th>
-      <td class="col col-1" *matCellDef="let element; let i = index"> {{ i + 1 }} </td>
-    </ng-container>
+  <div class="category-dropdown">
+    <p class="select-gener">Select the genre of books:</p>
 
-    <!-- Name Column -->
-    <ng-container matColumnDef="title">
-      <th class="col col-2" *matHeaderCellDef> Title </th>
-      <td class="col col-2" *matCellDef="let element"> {{element.title}} </td>
-    </ng-container>
+    <mat-form-field>
+      <mat-label>Filter</mat-label>
+      <mat-select (selectionChange)="getBooks($event.value)">
+        @for (category of firebaseService.allCategories ; track category) {
+          <mat-option class="dropdown-options" [value]="category.id">{{ category.value }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  </div>
 
-    <!-- Weight Column -->
-    <ng-container matColumnDef="category">
-      <th class="col col-3" *matHeaderCellDef> Category </th>
-      <td class="col col-3" *matCellDef="let element"> {{element.category}} </td>
-    </ng-container>
+  @if (books.length) {
+    <table mat-table [dataSource]="books" class="table">
+      <!-- Position Column -->
+      <ng-container matColumnDef="number">
+        <th class="col col-1" *matHeaderCellDef> No. </th>
+        <td class="col col-1" *matCellDef="let element; let i = index"> {{ i + 1 }} </td>
+      </ng-container>
 
-    <!-- Symbol Column -->
-    <ng-container matColumnDef="year">
-      <th class="col col-4" *matHeaderCellDef> Year </th>
-      <td class="col col-4" *matCellDef="let element"> {{element.year}} </td>
-    </ng-container>
+      <!-- Name Column -->
+      <ng-container matColumnDef="title">
+        <th class="col col-2" *matHeaderCellDef> Title </th>
+        <td class="col col-2" *matCellDef="let element"> {{element.title}} </td>
+      </ng-container>
 
-    <tr class="table-header" mat-header-row *matHeaderRowDef="displayColumns"></tr>
-    <tr class="table-row" mat-row *matRowDef="let row; columns: displayColumns;"></tr>
-  </table>
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="year">
+        <th class="col col-3" *matHeaderCellDef> Year </th>
+        <td class="col col-3" *matCellDef="let element"> {{element.year}} </td>
+      </ng-container>
+
+      <tr class="table-header" mat-header-row *matHeaderRowDef="displayColumns"></tr>
+      <tr class="table-row" mat-row *matRowDef="let row; columns: displayColumns;"></tr>
+    </table>
+  }
 </div>
+
 <app-footer></app-footer>

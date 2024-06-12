@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { FirebaseService } from '../../services/firebase.service';
+import { FirebaseService } from '../../services/firebase/firebase.service';
 
 import { RegistryForm } from '../../types/registry.types';
 

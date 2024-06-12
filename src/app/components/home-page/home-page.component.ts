@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { HeaderComponent } from '../shared/header/header.component';
 import { FooterComponent } from '../shared/footer/footer.component';
 
-import { FirebaseService } from '../../services/firebase.service';
+import { FirebaseService } from '../../services/firebase/firebase.service';
 
 import { BOOKS_PATH, CATEGORIES_PATH } from '../../constants/firestore.const';
 

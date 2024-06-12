@@ -1,0 +1,15 @@
+<mat-dialog-content class="error-modal">
+    <p class="error-header">{{ data.header }}</p>
+    <p class="error-message">{{ data.message }}</p>
+  
+    <div class="buttons-container">
+      <button
+        class="app-button revert-colors"
+        mat-dialog-close
+        (click)="onConfirm()"
+      >
+        {{ data.confirmButton?.text || "Confirm" }}
+      </button>
+    </div>
+  </mat-dialog-content>
+  

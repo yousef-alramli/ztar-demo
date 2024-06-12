@@ -5,7 +5,7 @@ import { validateForm } from '../../utils/formValidation';
 
 import { RegistryForm } from '../../types/registry.types';
 
-import { FirebaseService } from '../../services/firebase.service';
+import { FirebaseService } from '../../services/firebase/firebase.service';
 
 @Component({
   selector: 'app-signup',
