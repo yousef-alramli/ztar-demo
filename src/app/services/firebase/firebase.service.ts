@@ -7,27 +7,28 @@ import {
   addDoc,
   collection,
   doc,
+  DocumentData,
+  DocumentSnapshot,
   Firestore,
   getCountFromServer,
   getDoc,
   getDocs,
   getFirestore,
+  limit,
   query,
+  QuerySnapshot,
   setDoc,
   where,
   writeBatch,
-  limit,
-  DocumentData,
-  QuerySnapshot,
 } from 'firebase/firestore';
 import { initializeApp } from 'firebase/app';
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 
-import { BOOKS_PATH, CATEGORIES_PATH } from '../constants/firestore.const';
-import { environment } from '../../environments/environment';
+import { BOOKS_PATH, CATEGORIES_PATH } from '../../constants/firestore.const';
+import { environment } from '../../../environments/environment';
 
-import { CategoryData, DocData, QueryData, UpdateDocData } from '../types/firestoreData.types';
-import { RegistryForm } from '../types/registry.types';
+import { CategoryData, DocData, QueryData, UpdateDocData } from '../../types/firestoreData.types';
+import { RegistryForm } from '../../types/registry.types';
 
 @Injectable({
   providedIn: 'root'
@@ -40,7 +41,7 @@ export class FirebaseService {
     this.firestore = getFirestore(app);
   }
 
-  allCategories!: {[key: string]: CategoryData};
+  allCategories: CategoryData[] = [];
   authorsCount: number = 0;
   booksCount: number = 0;
   categoriesCount: number = 0;
@@ -80,7 +81,6 @@ export class FirebaseService {
           alert('Oops, some error occurred please try again later');
         }
       });
-
   }
 
   addDoc(docData: DocData, collectionName: string): void {
@@ -99,10 +99,8 @@ export class FirebaseService {
     });
   }
 
-  getDocById(id: string, collectionName: string): void {
-    getDoc(doc(this.firestore, collectionName, id)).then(data => {
-      console.log(data.data());
-    });
+  getDocById(id: string, collectionName: string): Observable<DocumentSnapshot<DocumentData, DocumentData>> {
+    return from(getDoc(doc(this.firestore, collectionName, id)));
   }
 
   getMultipleDocs(
@@ -136,12 +134,44 @@ export class FirebaseService {
     });
   }
 
-  addMultipleDocs(data: { [key: string]: string }[], collectionName: string): void {
-    const batch = writeBatch(this.firestore);
-    data.forEach(data => {
-      const docRef = doc(collection(this.firestore, collectionName));
-      batch.set(docRef, data);
-    })
-    batch.commit();
-  }
+  // addMultipleBooks(): void {
+  //   const batch = writeBatch(this.firestore);
+  //   data1.forEach(data => {
+  //     const docRef = doc(collection(this.firestore, CATEGORIES_PATH, '/3cCFfMIIZZLKzQXiELJb', BOOKS_PATH));
+  //     batch.set(docRef, data);
+  //   })
+  //   data2.forEach(data => {
+  //     const docRef = doc(collection(this.firestore, CATEGORIES_PATH, categories[1].value, BOOKS_PATH));
+  //     batch.set(docRef, data);
+  //   })
+  //   data3.forEach(data => {
+  //     const docRef = doc(collection(this.firestore, CATEGORIES_PATH, categories[2].value, BOOKS_PATH));
+  //     batch.set(docRef, data);
+  //   })
+  //   data4.forEach(data => {
+  //     const docRef = doc(collection(this.firestore, CATEGORIES_PATH, categories[3].value, BOOKS_PATH));
+  //     batch.set(docRef, data);
+  //   })
+  //   data5.forEach(data => {
+  //     const docRef = doc(collection(this.firestore, CATEGORIES_PATH, categories[4].value, BOOKS_PATH));
+  //     batch.set(docRef, data);
+  //   })
+  //   data6.forEach(data => {
+  //     const docRef = doc(collection(this.firestore, CATEGORIES_PATH, categories[5].value, BOOKS_PATH));
+  //     batch.set(docRef, data);
+  //   })
+  //   data7.forEach(data => {
+  //     const docRef = doc(collection(this.firestore, CATEGORIES_PATH, categories[6].value, BOOKS_PATH));
+  //     batch.set(docRef, data);
+  //   })
+  //   data8.forEach(data => {
+  //     const docRef = doc(collection(this.firestore, CATEGORIES_PATH, categories[7].value, BOOKS_PATH));
+  //     batch.set(docRef, data);
+  //   })
+  //   data9.forEach(data => {
+  //     const docRef = doc(collection(this.firestore, CATEGORIES_PATH, categories[8].value, BOOKS_PATH));
+  //     batch.set(docRef, data);
+  //   })
+  //   batch.commit();
+  // }
 }
