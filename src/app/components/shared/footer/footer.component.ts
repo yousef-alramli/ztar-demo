@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
-import { navigationPages } from '../../../constants/pages.const';
+import { authPages, noAuthPages } from '../../../constants/pages.const';
 
 import { NavigationPages } from '../../../types/navigation-pages.types';
 
@@ -16,6 +16,11 @@ import { NavigationPages } from '../../../types/navigation-pages.types';
   ],
   styleUrl: './footer.component.scss'
 })
-export class FooterComponent {
-  pages: NavigationPages[] = navigationPages;
+export class FooterComponent implements OnInit {
+  pages!: NavigationPages[];
+
+  ngOnInit(): void {
+    const auth: string | null = localStorage.getItem('token');
+    this.pages = auth ? authPages : noAuthPages
+  }
 }

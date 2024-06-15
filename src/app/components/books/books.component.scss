@@ -32,52 +32,6 @@
 
 }
 
-.table {
-  background-color: $transparent-white;
-
-  .table-header,
-  .table-row {
-    align-items: center;
-    border-radius: 4px;
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 25px;
-  }
-
-  .table-header {
-    background-color: $pink;
-    font-size: 14px;
-    text-transform: uppercase;
-  }
-
-  .table-row {
-    background-color: $white;
-    box-shadow: 0px 0px 15px 0px $transparent-black;
-  }
-
-  .col {
-    text-align: center;
-  }
-
-  .col-1 {
-    flex-basis: 10%;
-  }
-
-  .col-2 {
-    color: $pink;
-    cursor: pointer;
-    flex-basis: 45%;
-  }
-
-  .col-3 {
-    flex-basis: 30%;
-  }
-
-  .col-4 {
-    flex-basis: 15%;
-  }
-}
-
 @media all and (max-width: $laptop-large-breakpoint) {
   .dropdown-container {
     margin-right: 50px;

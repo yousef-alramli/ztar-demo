@@ -31,13 +31,19 @@
     <!-- Title Column -->
     <ng-container matColumnDef="title">
       <th class="col col-2" *matHeaderCellDef> Title </th>
-      <td class="col col-2" (click)="redirectToDetails(element.id)" *matCellDef="let element"> {{element.title}} </td>
+      <td class="col col-2" (click)="redirectToDetails(element.id)" *matCellDef="let element">{{element.title}}</td>
     </ng-container>
 
     <!-- Year Column -->
     <ng-container matColumnDef="year">
       <th class="col col-3" *matHeaderCellDef> Year </th>
       <td class="col col-3" *matCellDef="let element">{{element.year}}</td>
+    </ng-container>
+
+    <!-- Year Column -->
+    <ng-container matColumnDef="numOfBooks">
+      <th class="col col-4" *matHeaderCellDef> Num of books </th>
+      <td class="col col-4" *matCellDef="let element">{{element.numberOfBooks}}</td>
     </ng-container>
 
     <tr class="table-header" mat-header-row *matHeaderRowDef="displayColumns"></tr>

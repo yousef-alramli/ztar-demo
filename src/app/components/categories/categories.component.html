@@ -1,4 +1,10 @@
-<app-header pageName="Categories"></app-header>
-<div class="page page-banner"></div>
-<div class="page page-body"></div>
-<app-footer></app-footer>
+@if (selectedCategory) {
+<app-category-details
+  [categoryData]="selectedCategory"
+  (resetCategory)="onCategorySelect(undefined)"
+></app-category-details>
+} @else {
+<app-category-page
+  (selectCategory)="onCategorySelect($event)"
+></app-category-page>
+}

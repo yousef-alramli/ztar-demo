@@ -8,25 +8,29 @@ import { BOOKS_PATH } from "../constants/firestore.const";
 import { ModalService } from "../services/modal/modal.service";
 import { FirebaseService } from "../services/firebase/firebase.service";
 
-import { ErrorModalData } from "../types/modal.types";
+import { CustomModalData } from "../types/modal.types";
 import { DocData } from "../types/firestoreData.types";
 
 export const bookDetailsResolver: ResolveFn<DocData> = (
   route: ActivatedRouteSnapshot,
-  state: RouterStateSnapshot,
 ) => {
   const router = inject(Router);
-  const openModal = inject(ModalService).openErrorModal;
-  const modalData: ErrorModalData = {
+  const firebaseService = inject(FirebaseService);
+  const openModal = inject(ModalService).openCustomModal;
+
+  const modalData: CustomModalData = {
     header: 'Oops!',
     message: 'Can\'t find id, you can try again later',
+    cancelButton: {
+      action: () => router.navigate(['books']),
+      text: 'Confirm'
+    }
   };
 
   const bookId = route.paramMap.get('id')!;
-  return inject(FirebaseService).getDocById(bookId, BOOKS_PATH).pipe(map(data => {
-
+  return firebaseService.getDocById(bookId, BOOKS_PATH).pipe(map(data => {
     if (!data.data()) {
-      openModal(modalData, () => router.navigate(['books']))
+      openModal(modalData)
     }
     return data.data() as DocData;
   }));

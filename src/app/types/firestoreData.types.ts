@@ -1,11 +1,13 @@
-import { WhereFilterOp } from 'firebase/firestore';
+import { WhereFilterOp, DocumentData } from 'firebase/firestore';
 
 
 export type BookData = {
-  title: string,
   category: string,
-  year: number,
   id?: string,
+  numberOfBooks: number,
+  Publisher: string,
+  title: string,
+  year: number,
 };
 
 export type CategoryData = {
@@ -15,13 +17,18 @@ export type CategoryData = {
 
 export type DocData = BookData | CategoryData;
 
-export type UpdateDocData = & {
+export type UpdateDocData = DocData & {
   id: string,
 };
 
 export type QueryData = {
   customLimit?: number,
-  fieldToFilter?: string,
-  operator?: WhereFilterOp,
-  value?: string | boolean | number,
+  startAfterDoc?: DocumentData,
+  whereQuery?: WhereQuery[],
 };
+
+export type WhereQuery = {
+  fieldToFilter: string,
+  operator: WhereFilterOp,
+  value: string | boolean | number,
+}

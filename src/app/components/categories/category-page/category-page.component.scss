@@ -1,0 +1,44 @@
+@import '../../../styles/_variables';
+
+.page-body.page {
+  .app-button {
+    display: inline-block;
+    padding: 10px;
+
+    &.create-button {
+      margin-left: 16px;
+      width: 150px;
+    }
+
+    &.search-input {
+      border-radius: 4px;
+      cursor: default;
+      font-family: 'Lato';
+      margin-bottom: 24px;
+      margin-left: calc(50% - 150px);
+      width: 300px;
+    }
+  }
+
+  .col-1 {
+    flex-basis: 10%;
+  }
+
+  .col-2 {
+    color: $black;
+    pointer-events: none;
+  }
+
+  .col-3 {
+    flex-basis: 15%;
+  }
+
+  .col-4 {
+    flex-basis: 15%;
+  }
+
+  .app-button {
+    height: 40px;
+    width: 80px;
+  }
+}

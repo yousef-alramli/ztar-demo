@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
-import { ErrorModalComponent } from '../../components/shared/error-modal/error-modal.component';
+import { CustomModalComponent } from '../../components/shared/custom-modal/custom-modal.component';
 
-import { ErrorModalData } from '../../types/modal.types';
+import { CustomModalData } from '../../types/modal.types';
 
 @Injectable({
   providedIn: 'root',
@@ -12,12 +12,14 @@ export class ModalService {
 
   constructor(public dialog: MatDialog) { };
 
-  openErrorModal = (modalData: ErrorModalData, onClose: () => void) => {
-    this.dialog.open(ErrorModalComponent,{
+  openCustomModal = (modalData: CustomModalData) => {
+    this.dialog.open(CustomModalComponent, {
       data: modalData,
     }).afterClosed()
-    .subscribe(() => {
-      onClose();
-    });
+      .subscribe(() => {
+        if (modalData?.cancelButton?.action) {
+          modalData.cancelButton.action()
+        }
+      });
   }
 }

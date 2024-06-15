@@ -1,0 +1,36 @@
+// Override dropdown styles
+.dropdown {
+  .mat-mdc-text-field-wrapper {
+    border: 1px solid $gray;
+    border-radius: 4px;
+  }
+
+  .mdc-line-ripple {
+    display: none;
+  }
+}
+
+.cdk-overlay-container {
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: $transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: $pink;
+    border-radius: 10px;
+
+  }
+
+  .cdk-overlay-pane:not(.mat-mdc-select-panel-above) div.mat-mdc-select-panel {
+    border-radius: 17px;
+    // overflow: hidden;
+    position: relative;
+    top: 12px;
+    background-color: $purple-gray;
+  }
+}

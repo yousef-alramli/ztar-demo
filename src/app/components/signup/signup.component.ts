@@ -5,7 +5,7 @@ import { validateForm } from '../../utils/formValidation';
 
 import { RegistryForm } from '../../types/registry.types';
 
-import { FirebaseService } from '../../services/firebase/firebase.service';
+import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-signup',
@@ -14,7 +14,7 @@ import { FirebaseService } from '../../services/firebase/firebase.service';
 })
 export class SignupComponent {
 
-  constructor(private firebaseService: FirebaseService) { }
+  constructor(private authService: AuthService) { }
 
   signupForm = new FormGroup({
     firstName: new FormControl<string>('', [Validators.required]),
@@ -39,6 +39,6 @@ export class SignupComponent {
       return;
     }
 
-    this.firebaseService.signup(this.signupForm);
+    this.authService.signup(this.signupForm);
   }
 }

@@ -4,6 +4,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
+import { Router } from '@angular/router';
 
 import { Subscription } from 'rxjs';
 
@@ -15,7 +16,6 @@ import { FirebaseService } from '../../services/firebase/firebase.service';
 import { BOOKS_PATH, CATEGORIES_PATH } from '../../constants/firestore.const'
   ;
 import { BookData, CategoryData, QueryData } from '../../types/firestoreData.types';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-books',
@@ -41,8 +41,8 @@ export class BooksComponent implements OnInit, OnDestroy {
   ) { };
 
   books: BookData[] = [];
-  displayColumns = ['number', 'title', 'year'];
-  selectedCategory:string = '';
+  displayColumns = ['number', 'title', 'year', 'numOfBooks'];
+  selectedCategory: string = '';
 
   getBooksSubscribe!: Subscription;
   getCategoriesSubscribe!: Subscription;
@@ -67,9 +67,13 @@ export class BooksComponent implements OnInit, OnDestroy {
 
   getBooks(id: string) {
     const customFilters: QueryData = {
-      fieldToFilter: 'category',
-      operator: '==',
-      value: id
+      whereQuery: [
+        {
+          fieldToFilter: 'category',
+          operator: '==',
+          value: id
+        },
+      ]
     };
     this.getBooksSubscribe = this.firebaseService.getMultipleDocs(BOOKS_PATH, customFilters).subscribe(booksDoc => {
       const allBooks: BookData[] = [];
@@ -90,8 +94,8 @@ export class BooksComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.getBooksSubscribe.unsubscribe();
-    this.getCategoriesSubscribe.unsubscribe();
+    this.getBooksSubscribe?.unsubscribe();
+    this.getCategoriesSubscribe?.unsubscribe();
   }
 
 }

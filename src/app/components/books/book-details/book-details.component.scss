@@ -1,0 +1,31 @@
+@import '../../../styles/_variables';
+
+.details-page {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+
+  .details-card {
+    background-color: $transparent-black-dark;
+    border-radius: 15px;
+    color: $pink;
+    padding: 16px;
+    width: 450px;
+
+    .key,
+    .value {
+      display: inline-block;
+      font-size: $font-medium;
+    }
+
+    .key {
+      font-family: 'Lato 700';
+    }
+
+    .value {
+      margin-bottom: 32px;
+      margin-left: 10px;
+    }
+  }
+}

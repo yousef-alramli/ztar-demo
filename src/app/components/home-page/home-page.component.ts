@@ -1,11 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { HeaderComponent } from '../shared/header/header.component';
 import { FooterComponent } from '../shared/footer/footer.component';
 
 import { FirebaseService } from '../../services/firebase/firebase.service';
-
-import { BOOKS_PATH, CATEGORIES_PATH } from '../../constants/firestore.const';
 
 @Component({
   selector: 'app-home-page',
@@ -17,13 +15,6 @@ import { BOOKS_PATH, CATEGORIES_PATH } from '../../constants/firestore.const';
   ],
   styleUrl: './home-page.component.scss',
 })
-export class HomePageComponent implements OnInit {
-
+export class HomePageComponent {
   constructor(public firebaseService: FirebaseService) { }
-
-  ngOnInit(): void {
-    this.firebaseService.getCount(BOOKS_PATH);
-    this.firebaseService.getCount(CATEGORIES_PATH);
-  }
-
 }

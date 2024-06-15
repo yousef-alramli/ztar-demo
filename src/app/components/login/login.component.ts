@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { FirebaseService } from '../../services/firebase/firebase.service';
-
 import { RegistryForm } from '../../types/registry.types';
 
 import { validateForm } from '../../utils/formValidation';
+import { AuthService } from '../../services/auth/auth.service';
 
 
 @Component({
@@ -14,7 +13,7 @@ import { validateForm } from '../../utils/formValidation';
   styleUrl: './login.component.scss',
 })
 export class LoginComponent {
-  constructor(private firestoreService: FirebaseService) {}
+  constructor(private authService: AuthService) { }
 
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.email, Validators.required]),
@@ -29,6 +28,6 @@ export class LoginComponent {
       return;
     }
 
-    this.firestoreService.login(this.loginForm);
+    this.authService.login(this.loginForm);
   }
 }

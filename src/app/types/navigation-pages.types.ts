@@ -1,5 +1,5 @@
 export type NavigationPages = {
-    icon: string,
-    name: string,
-    route: string,
+  icon: string,
+  name: string,
+  route: string,
 }

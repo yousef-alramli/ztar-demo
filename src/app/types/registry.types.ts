@@ -8,6 +8,9 @@ export type RegistryForm = {
   email?: string;
   password?: string;
   confirmPassword?: string;
+
+  // for category create
+  name?: string;
 }
 
 export type ValidationErrorMessages = {

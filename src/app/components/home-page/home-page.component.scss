@@ -31,6 +31,7 @@
 }
 
 .counts-holder {
+  margin-left: 50%;
   padding-top: 145px;
 
   .count-container {
@@ -93,6 +94,8 @@
   }
 
   .counts-holder {
+    margin: auto;
     padding-top: 200px;
+    width: fit-content;
   }
 }

@@ -1,28 +1,26 @@
 @import '_reset';
 @import 'app/styles/_variables';
+@import 'app/styles/fonts';
+@import 'app/styles/overrides';
+@import 'app/styles/tables';
 
-@font-face {
-  font-family: 'Lato 700';
-  src: url('assets/fonts/Lato/Lato-Black.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'Lato 600';
-  src: url('assets/fonts/Lato/Lato-Bold.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'Lato';
-  src: url('assets/fonts/Lato/Lato-Regular.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'Lato 300';
-  src: url('assets/fonts/Lato/Lato-Light.ttf') format('truetype');
+.blurry-background {
+  background-image: url('./assets/images/bannerbig_Desktop\ 1.png');
+  background-position: right top;
+  background-repeat: no-repeat;
+  background-size: auto 100%;
+  bottom: 0;
+  filter: blur(4px);
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: -1;
 }
 
 .page {
   background-repeat: no-repeat;
+  min-height: 100vh
 }
 
 .page-banner {
@@ -40,7 +38,7 @@
   background-position: 370px top;
   min-height: 400px;
   margin-bottom: 48px;
-  padding-left: 50%;
+  padding: 0 65px;
   margin-top: 40px;
 }
 
@@ -84,6 +82,7 @@
   .page-body {
     background-image: url('assets/images/Illustration\ tablet.png');
     background-size: 260px 260px;
+    padding: 0 24px;
   }
 }
 
@@ -102,45 +101,6 @@
   .page-body {
     background-image: url('assets/images/Illustration\ Mobile.png');
     background-size: 200px 200px;
-  }
-}
-
-// Override dropdown styles
-// .mat-form-field-underline {
-//   display: none;
-// }
-.dropdown {
-  .mat-mdc-text-field-wrapper {
-    border: 1px solid $gray;
-    border-radius: 4px;
-  }
-
-  .mdc-line-ripple {
-    display: none;
-  }
-}
-
-.cdk-overlay-container {
-
-  ::-webkit-scrollbar {
-    width: 10px;
-  }
-
-  ::-webkit-scrollbar-track {
-    background: $transparent;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: $pink;
-    border-radius: 10px;
-
-  }
-
-  .cdk-overlay-pane:not(.mat-mdc-select-panel-above) div.mat-mdc-select-panel {
-    border-radius: 17px;
-    // overflow: hidden;
-    position: relative;
-    top: 12px;
-    background-color: $purple-gray;
+    padding: 0 20px;
   }
 }

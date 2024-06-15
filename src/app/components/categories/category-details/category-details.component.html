@@ -1,0 +1,65 @@
+<app-header pageName="Category Details"></app-header>
+
+<div class="page page-banner"></div>
+
+<div class="page page-body">
+  <div class="table-header">
+    <button class="app-button" (click)="onSave()">Save</button>
+
+    <div class="category-name-holder">
+      <p class="category-label">Category name:</p>
+      <input
+        class="app-button input"
+        [(ngModel)]="categoryData.value"
+        (change)="addToEdited(categoryData, categoriesColName)"
+      />
+    </div>
+  </div>
+
+  <table mat-table [dataSource]="books" class="table">
+    <!-- Position Column -->
+    <ng-container matColumnDef="number">
+      <th class="col col-1" *matHeaderCellDef>No.</th>
+      <td class="col col-1" *matCellDef="let element; let i = index">
+        {{ i + 1 }}
+      </td>
+    </ng-container>
+
+    <!-- Title Column -->
+    <ng-container matColumnDef="title">
+      <th class="col col-2" *matHeaderCellDef>Title</th>
+      <td class="col col-2" *matCellDef="let element">{{ element.title }}</td>
+    </ng-container>
+
+    <!-- Year Column -->
+    <ng-container matColumnDef="year">
+      <th class="col col-3" *matHeaderCellDef>Year</th>
+      <td class="col col-3" *matCellDef="let element">{{ element.year }}</td>
+    </ng-container>
+
+    <!-- Year Column -->
+    <ng-container matColumnDef="numOfBooks">
+      <th class="col col-4" *matHeaderCellDef>Num of books</th>
+      <td class="col col-4" *matCellDef="let element">
+        <input
+          class="app-button input"
+          [(ngModel)]="element.numberOfBooks"
+          (change)="addToEdited(element, booksColName)"
+        />
+      </td>
+    </ng-container>
+
+    <tr
+      class="table-header"
+      mat-header-row
+      *matHeaderRowDef="displayColumns"
+    ></tr>
+    <tr
+      class="table-row"
+      mat-row
+      *matRowDef="let row; columns: displayColumns"
+    ></tr>
+  </table>
+</div>
+
+<app-footer></app-footer>

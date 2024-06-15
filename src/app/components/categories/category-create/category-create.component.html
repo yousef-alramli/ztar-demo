@@ -1,0 +1,27 @@
+<app-header pageName="Category Create"></app-header>
+
+<div class="page auth-page">
+  <div class="blurry-background"></div>
+
+  <form class="auth-form" [formGroup]="createForm" (ngSubmit)="onSave()">
+    <p class="auth-header">Create Category</p>
+
+    <input
+      class="auth-input"
+      placeholder="Category Name"
+      type="text"
+      formControlName="name"
+    />
+    @if (formErrors['name']) {
+    <p class="error-text">*{{ formErrors["name"] }}</p>
+    }
+
+    <input
+      class="app-button revert-colors auth-input"
+      type="submit"
+      value="Save"
+    />
+  </form>
+</div>
+
+<app-footer></app-footer>

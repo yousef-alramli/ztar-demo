@@ -1,18 +1,26 @@
 import { Component } from '@angular/core';
 
-import { HeaderComponent } from '../shared/header/header.component';
-import { FooterComponent } from '../shared/footer/footer.component';
+import { CategoryDetailsComponent } from './category-details/category-details.component';
+import { CategoryPageComponent } from './category-page/category-page.component';
+
+import { CategoryData } from '../../types/firestoreData.types';
+
 
 @Component({
   selector: 'app-categories',
   standalone: true,
   imports: [
-    FooterComponent,
-    HeaderComponent,
+    CategoryPageComponent,
+    CategoryDetailsComponent,
   ],
   templateUrl: './categories.component.html',
   styleUrl: './categories.component.scss'
 })
 export class CategoriesComponent {
 
-}
+  selectedCategory!: CategoryData | undefined;
+
+  onCategorySelect(category: CategoryData | undefined) {
+    this.selectedCategory = category;
+  }
+};

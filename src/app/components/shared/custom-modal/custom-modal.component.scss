@@ -1,0 +1,27 @@
+@import '../../../styles/_variables';
+
+.custom-modal {
+  align-items: center;
+  color: $black;
+  display: flex;
+  flex-direction: column;
+  height: 300px;
+  justify-content: space-around;
+  width: 450px;
+
+  .modal-header {
+    font-family: 'Lato 700';
+    font-size: $font-xl;
+  }
+
+  .modal-message {
+    font-size: $font-medium;
+    line-height: 25px;
+  }
+
+  .buttons-container {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+  }
+}

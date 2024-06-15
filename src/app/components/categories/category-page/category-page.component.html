@@ -1,0 +1,70 @@
+<app-header pageName="Categories"></app-header>
+
+<div class="page page-banner"></div>
+
+<div class="page page-body">
+  <input
+    class="app-button search-input"
+    [(ngModel)]="searchQuery"
+    (keyup.enter)="onSearch()"
+    placeholder="Search for category"
+  />
+
+  <a class="app-button create-button" [routerLink]="['create']">Create Category</a>
+
+  <table mat-table [dataSource]="pageCategories" class="table">
+    <!-- Position Column -->
+    <ng-container matColumnDef="number">
+      <th class="col col-1" *matHeaderCellDef>No.</th>
+      <td class="col col-1" *matCellDef="let element; let i = index">
+        {{ startCount + i + 1 }}
+      </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="value">
+      <th class="col col-2" *matHeaderCellDef>Name</th>
+      <td class="col col-2" *matCellDef="let element">{{ element.value }}</td>
+    </ng-container>
+
+    <!-- Edit Column -->
+    <ng-container matColumnDef="edit">
+      <th class="col col-3" *matHeaderCellDef>Edit</th>
+      <td class="col col-3" *matCellDef="let element">
+        <button class="app-button" (click)="onEdit(element)">Edit</button>
+      </td>
+    </ng-container>
+
+    <!-- Delete Column -->
+    <ng-container matColumnDef="delete">
+      <th class="col col-4" *matHeaderCellDef>Delete</th>
+      <td class="col col-4" *matCellDef="let element">
+        <button class="app-button revert-colors" (click)="onDelete(element.id)">
+          Delete
+        </button>
+      </td>
+    </ng-container>
+
+    <tr
+      class="table-header"
+      mat-header-row
+      *matHeaderRowDef="displayColumns"
+    ></tr>
+    <tr
+      class="table-row"
+      mat-row
+      *matRowDef="let row; columns: displayColumns"
+    ></tr>
+  </table>
+
+  <mat-paginator
+    [length]="firebaseService.categoriesCount"
+    [pageSize]="pageSize"
+    [pageSizeOptions]="[5, 10, 25, 100]"
+    [pageIndex]="pageIndex"
+    (page)="handlePageEvent($event)"
+  >
+  </mat-paginator>
+</div>
+
+<app-footer></app-footer>

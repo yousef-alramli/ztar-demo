@@ -1,1 +1,24 @@
-<p>book-details works!</p>
+<app-header pageName="Book Details"></app-header>
+
+<div class="blurry-background"></div>
+
+<div class="page details-page">
+  @if (bookDetails) {
+  <div class="details-card">
+    <div>
+      <p class="key">Name:</p>
+      <p class="title value">{{ bookDetails.title }}</p>
+    </div>
+    <div>
+      <p class="key">Publisher:</p>
+      <p class="published value">{{ bookDetails.Publisher }}</p>
+    </div>
+    <div>
+      <p class="key">Year:</p>
+      <p class="year value">{{ bookDetails.year }}</p>
+    </div>
+  </div>
+  }
+</div>
+
+<app-footer></app-footer>

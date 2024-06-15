@@ -1,5 +1,5 @@
-<div class="auth-page">
-  <div class="image-background"></div>
+<div class="page auth-page">
+  <div class="blurry-background"></div>
 
   <form class="auth-form" [formGroup]="signupForm" (ngSubmit)="onSignup()">
     <p class="auth-header">WELCOME</p>
@@ -11,9 +11,9 @@
       formControlName="firstName"
     />
     @if (formErrors['firstName']) {
-      <p class="error-text">
-        {{ formErrors["firstName"] }}
-      </p>
+    <p class="error-text">
+      {{ formErrors["firstName"] }}
+    </p>
     }
 
     <input
@@ -30,9 +30,9 @@
       formControlName="email"
     />
     @if (formErrors['email']) {
-      <p class="error-text">
-        {{ formErrors["email"] }}
-      </p>
+    <p class="error-text">
+      {{ formErrors["email"] }}
+    </p>
     }
 
     <input
@@ -42,9 +42,9 @@
       formControlName="password"
     />
     @if (formErrors['password']) {
-      <p class="error-text">
-        {{ formErrors["password"] }}
-      </p>
+    <p class="error-text">
+      {{ formErrors["password"] }}
+    </p>
     }
 
     <input
@@ -54,17 +54,15 @@
       formControlName="confirmPassword"
     />
     @if (formErrors['confirmPassword']) {
-      <p class="error-text">
-        {{ formErrors["confirmPassword"] }}
-      </p>
+    <p class="error-text">
+      {{ formErrors["confirmPassword"] }}
+    </p>
     }
 
     <input class="app-button revert-colors auth-input" type="submit" />
   </form>
 
   <div class="auth-form new-account">
-    <a routerLink="/login" class="new-account-link"
-      >Already have an account?</a
-    >
+    <a routerLink="/login" class="new-account-link">Already have an account?</a>
   </div>
 </div>

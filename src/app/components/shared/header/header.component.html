@@ -14,22 +14,24 @@
     <h2 class="page-name">{{ pageName }}</h2>
 
     @if (openNav) {
-      <div class="side-bar">
-        @for (page of pages; track $index) {
-          <a
-            class="page-link"
-            [routerLink]="page.route"
-            (mousedown)="$event.preventDefault()"
-          >
-            <mat-icon>{{ page.icon }}</mat-icon>
-            {{ page.name }}
-          </a>
-        }
-      </div>
+    <div class="side-bar">
+      @for (page of pages; track $index) {
+      <a
+        class="page-link"
+        [routerLink]="page.route"
+        (mousedown)="$event.preventDefault()"
+      >
+        <mat-icon>{{ page.icon }}</mat-icon>
+        {{ page.name }}
+      </a>
+      }
+    </div>
     }
   </div>
 
   <div class="login-container">
+    @if (!userIsAuthenticated) {
     <a class="app-button" routerLink="/login">Login</a>
+    }
   </div>
 </div>

@@ -1,6 +1,14 @@
 import { NavigationPages } from "../types/navigation-pages.types";
 
-export const navigationPages: NavigationPages[] = [
+export const noAuthPages: NavigationPages[] = [
+  {
+    icon: 'home',
+    route: '/home',
+    name: 'Home page',
+  },
+]
+
+export const authPages = [
   {
     icon: 'home',
     route: '/home',

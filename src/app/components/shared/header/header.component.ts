@@ -1,10 +1,9 @@
-import { Component, ElementRef, Input, OnInit, ViewChild,  } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild, } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import { Router, RouterLink } from '@angular/router';
-
-import { navigationPages } from '../../../constants/pages.const';
+import { RouterLink } from '@angular/router';
 
 import { NavigationPages } from '../../../types/navigation-pages.types';
+import { authPages, noAuthPages } from '../../../constants/pages.const';
 
 @Component({
   selector: 'app-header',
@@ -19,15 +18,18 @@ import { NavigationPages } from '../../../types/navigation-pages.types';
 export class HeaderComponent implements OnInit {
   @ViewChild('sideBar') sideBar!: ElementRef;
 
-  @Input() pageName!:string;
+  @Input() pageName!: string;
 
   currentPage: string = '';
+  userIsAuthenticated = false;
+
+  pages!: NavigationPages[];
+  openNav: boolean = false;
 
   ngOnInit(): void {
+    this.userIsAuthenticated = !!localStorage.getItem('token');
+    this.pages = this.userIsAuthenticated ? authPages : noAuthPages
   }
-
-  pages: NavigationPages[] = navigationPages;
-  openNav: boolean = false;
 
   toggleOpenNav() {
     this.openNav = !this.openNav;
