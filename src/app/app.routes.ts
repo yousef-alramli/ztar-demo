@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { authGuardGuard } from './services/auth-guard/auth-guard.guard';
+import { authGuard } from './services/auth-guard/auth-guard.guard';
 import { noAuthGuard } from './services/no-auth-guard/no-auth.guard';
 
 export const routes: Routes = [
@@ -23,12 +23,12 @@ export const routes: Routes = [
   {
     path: 'books',
     loadChildren: () => import('./components/books/books.module').then(m => m.BooksModule),
-    canActivate: [authGuardGuard],
+    canActivate: [authGuard],
   },
   {
     path: 'categories',
     loadChildren: () => import('./components/categories/categories.module').then(m => m.CategoriesModule),
-    canActivate: [authGuardGuard],
+    canActivate: [authGuard],
   },
 
   // Wild route

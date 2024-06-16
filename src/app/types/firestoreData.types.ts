@@ -5,7 +5,7 @@ export type BookData = {
   category: string,
   id?: string,
   numberOfBooks: number,
-  Publisher: string,
+  Publisher?: string,
   title: string,
   year: number,
 };

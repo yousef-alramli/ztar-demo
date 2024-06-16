@@ -1,27 +1,28 @@
 import { Injectable } from '@angular/core';
-
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { RegistryForm } from '../../types/registry.types';
 import { FormGroup } from '@angular/forms';
-import { ModalService } from '../modal/modal.service';
 import { Router } from '@angular/router';
+
+import * as firebaseAuth from "firebase/auth";
+
+import { RegistryForm } from '../../types/registry.types';
+import { ModalService } from '../modal/modal.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-
   constructor(
     private modalService: ModalService,
     private router: Router,
   ) { }
 
+  firebase = firebaseAuth;
 
   login(loginForm: FormGroup) {
     const { email, password } = loginForm.value as RegistryForm;
-    const auth = getAuth();
+    const auth = this.firebase.getAuth();
 
-    signInWithEmailAndPassword(auth, email as string, password as string)
+    this.firebase.signInWithEmailAndPassword(auth, email as string, password as string)
       .then((userCredential) => {
         userCredential.user.getIdTokenResult().then(data => {
           localStorage.setItem('token', data.token);
@@ -40,10 +41,12 @@ export class AuthService {
 
   signup(signupForm: FormGroup) {
     const { email, password } = signupForm.value as RegistryForm;
-    const auth = getAuth();
-    createUserWithEmailAndPassword(auth, email as string, password as string)
+    const auth = this.firebase.getAuth();
+
+    this.firebase.createUserWithEmailAndPassword(auth, email as string, password as string)
       .then((userCredential) => {
-        updateProfile(userCredential.user, {
+
+        this.firebase.updateProfile(userCredential.user, {
           displayName: `${signupForm.value.firstName} ${signupForm.value.lastName || ''}`.trim(),
         });
 

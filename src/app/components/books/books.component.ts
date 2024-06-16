@@ -28,12 +28,11 @@ import { BookData, CategoryData, QueryData } from '../../types/firestoreData.typ
     MatSelectModule,
     MatInputModule,
     FormsModule,
-    ReactiveFormsModule,
   ],
   templateUrl: './books.component.html',
   styleUrl: './books.component.scss'
 })
-export class BooksComponent implements OnInit, OnDestroy {
+export class BooksComponent {
 
   constructor(
     public firebaseService: FirebaseService,

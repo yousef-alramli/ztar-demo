@@ -9,6 +9,6 @@ import { BooksRoutingModule } from './books-routing.module';
   imports: [
     CommonModule,
     BooksRoutingModule
-  ]
+  ],
 })
 export class BooksModule { }

@@ -6,7 +6,7 @@ import { FooterComponent } from '../../shared/footer/footer.component';
 import { HeaderComponent } from '../../shared/header/header.component';
 import { BookData } from '../../../types/firestoreData.types';
 
-fdescribe('BookDetailsComponent', () => {
+describe('BookDetailsComponent', () => {
   let component: BookDetailsComponent;
   let fixture: ComponentFixture<BookDetailsComponent>;
 
@@ -19,19 +19,19 @@ fdescribe('BookDetailsComponent', () => {
     year: 1992,
   };
 
-  const mockActivatedRoute = {
-    data: of({ details: mockBookDetails })
-  };
-
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
         FooterComponent,
         HeaderComponent,
       ],
-      declarations: [ BookDetailsComponent ],
       providers: [
-        { provide: ActivatedRoute, useValue: mockActivatedRoute }
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            data: of({ details: mockBookDetails }),
+          }
+        }
       ]
     }).compileComponents();
   });
@@ -46,14 +46,20 @@ fdescribe('BookDetailsComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should set bookDetails on init', () => {
-    expect(component.bookDetails).toEqual(mockBookDetails);
+  describe('ngOnInit', () => {
+    it('should set bookDetails', () => {
+      expect(component.bookDetails).toEqual(mockBookDetails);
+    });
+
   });
 
-  it('should render book title in the template', () => {
-    const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.title').textContent).toContain('Test Book');
-    expect(compiled.querySelector('.publisher').textContent).toContain('Test publisher');
-    expect(compiled.querySelector('.year').textContent).toContain(1992);
-  });
+  describe('details form', () => {
+    it('should render book title in the template', () => {
+      const compiled = fixture.nativeElement;
+
+      expect(compiled.querySelector('.title').textContent).toContain('Test Book');
+      expect(compiled.querySelector('.publisher').textContent).toContain('Test publisher');
+      expect(compiled.querySelector('.year').textContent).toContain(1992);
+    });
+  } );
 });

@@ -2,27 +2,10 @@ import { Injectable } from '@angular/core';
 
 import { Observable, from, map } from 'rxjs';
 
-import {
-  addDoc,
-  collection,
-  doc,
-  DocumentData,
-  DocumentSnapshot,
-  Firestore,
-  getAggregateFromServer,
-  getCountFromServer,
-  getDoc,
-  getDocs,
-  getFirestore,
-  limit,
-  query,
-  QueryConstraint,
-  QuerySnapshot,
-  startAfter,
-  sum,
-  where,
-  writeBatch,
-} from 'firebase/firestore';
+import * as Firestore from 'firebase/firestore';
+
+import { DocumentData, DocumentSnapshot, QuerySnapshot, QueryConstraint } from 'firebase/firestore'; // exporting types
+
 import { initializeApp } from 'firebase/app';
 
 import { BOOKS_PATH, CATEGORIES_PATH } from '../../constants/firestore.const';
@@ -34,11 +17,13 @@ import { CategoryData, DocData, QueryData, WhereQuery } from '../../types/firest
   providedIn: 'root'
 })
 export class FirebaseService {
-  firestore: Firestore;
+  firebaseFirestore: typeof Firestore; // using this way becasue of unit test
+  firestoreDb: Firestore.Firestore;
 
   constructor() {
     const app = initializeApp(environment.firebase);
-    this.firestore = getFirestore(app);
+    this.firebaseFirestore = Firestore;
+    this.firestoreDb = Firestore.getFirestore(app);
   }
 
   allCategories: CategoryData[] = [];
@@ -47,11 +32,11 @@ export class FirebaseService {
   categoriesCount: number = 0;
 
   addDoc(docData: DocData, collectionName: string): Observable<DocumentData> {
-    return from(addDoc(collection(this.firestore, collectionName), docData));
+    return from(this.firebaseFirestore.addDoc(this.firebaseFirestore.collection(this.firestoreDb, collectionName), docData));
   }
 
   getDocById(id: string, collectionName: string): Observable<DocumentSnapshot<DocumentData, DocumentData>> {
-    return from(getDoc(doc(this.firestore, collectionName, id)));
+    return from(this.firebaseFirestore.getDoc(this.firebaseFirestore.doc(this.firestoreDb, collectionName, id)));
   }
 
   getMultipleDocs(
@@ -59,29 +44,29 @@ export class FirebaseService {
     { whereQuery, customLimit, startAfterDoc }: QueryData
   ): Observable<QuerySnapshot<DocumentData, DocumentData>> {
 
-    const col = collection(this.firestore, collectionName);
+    const col = this.firebaseFirestore.collection(this.firestoreDb, collectionName);
     const filters: QueryConstraint[] = [];
 
     if (whereQuery?.length) {
       whereQuery.forEach(({ fieldToFilter, operator, value }) => {
-        filters.push(where(fieldToFilter, operator, value));
+        filters.push(this.firebaseFirestore.where(fieldToFilter, operator, value));
       })
     }
 
     if (customLimit) {
-      filters.push(limit(customLimit));
+      filters.push(this.firebaseFirestore.limit(customLimit));
       if (startAfterDoc) {
-        filters.push(startAfter(startAfterDoc));
+        filters.push(this.firebaseFirestore.startAfter(startAfterDoc));
       }
     }
 
-    const customQuery = query(col, ...filters);
+    const customQuery = this.firebaseFirestore.query(col, ...filters);
 
-    return from(getDocs(customQuery));
+    return from(this.firebaseFirestore.getDocs(customQuery));
   }
 
   deleteCategory(id: string): Observable<void> {
-    const batch = writeBatch(this.firestore);
+    const batch = this.firebaseFirestore.writeBatch(this.firestoreDb);
 
     return this.getMultipleDocs(
       BOOKS_PATH,
@@ -93,7 +78,7 @@ export class FirebaseService {
         }],
       }
     ).pipe(map(BookDocs => {
-      batch.delete(doc(this.firestore, CATEGORIES_PATH, id));
+      batch.delete(this.firebaseFirestore.doc(this.firestoreDb, CATEGORIES_PATH, id));
 
       BookDocs.docs.forEach(book => {
         batch.delete(book.ref);
@@ -104,32 +89,32 @@ export class FirebaseService {
   }
 
   getCategoriesCount(whereQuery: WhereQuery[] = []): void {
-    const col = collection(this.firestore, CATEGORIES_PATH);
+    const col = this.firebaseFirestore.collection(this.firestoreDb, CATEGORIES_PATH);
     const filters: QueryConstraint[] = [];
     if (whereQuery?.length) {
       whereQuery.forEach(({ fieldToFilter, operator, value }) => {
-        filters.push(where(fieldToFilter, operator, value));
+        filters.push(this.firebaseFirestore.where(fieldToFilter, operator, value));
       });
     }
 
-    from(getCountFromServer(query(col, ...filters))).subscribe(data => {
+    from(this.firebaseFirestore.getCountFromServer(this.firebaseFirestore.query(col, ...filters))).subscribe(data => {
       this.categoriesCount = data.data().count;
     });
   }
 
   getBooksCount(): void {
-    const col = collection(this.firestore, BOOKS_PATH);
-    from(getAggregateFromServer(col, {
-      totalBooks: sum('numberOfBooks'),
+    const col = this.firebaseFirestore.collection(this.firestoreDb, BOOKS_PATH);
+    from(this.firebaseFirestore.getAggregateFromServer(col, {
+      totalBooks: this.firebaseFirestore.sum('numberOfBooks'),
     })).subscribe(data => {
       this.booksCount = data.data().totalBooks;
     });
   }
 
   updateMultipleDocs(data: { [key: string]: string | number }[]): Observable<void> {
-    const batch = writeBatch(this.firestore);
+    const batch = this.firebaseFirestore.writeBatch(this.firestoreDb);
     data.forEach(data => {
-      const docRef = doc(this.firestore, data['collectionName'] as string, data['id'] as string);
+      const docRef = this.firebaseFirestore.doc(this.firestoreDb, data['collectionName'] as string, data['id'] as string);
       batch.set(docRef, data);
     });
     return from(batch.commit());
